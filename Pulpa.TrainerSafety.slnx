@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Pulpa.TrainerSafety.AppHost/Pulpa.TrainerSafety.AppHost.csproj" />
+  <Project Path="Pulpa.TrainerSafety.ServiceDefaults/Pulpa.TrainerSafety.ServiceDefaults.csproj" />
+  <Project Path="Pulpa.TrainerSafety/Pulpa.TrainerSafety.csproj" />
+</Solution>
