@@ -11,7 +11,10 @@
     <File Path="Architecture/system-architecture-diagram.md" />
     <File Path="Architecture/tracking-analytics-system.md" />
   </Folder>
+  <Project Path="Pulpa.TrainerSafety.Api/Pulpa.TrainerSafety.Api.csproj" />
   <Project Path="Pulpa.TrainerSafety.AppHost/Pulpa.TrainerSafety.AppHost.csproj" />
+  <Project Path="Pulpa.TrainerSafety.Data/Pulpa.TrainerSafety.Data.csproj" />
+  <Project Path="Pulpa.TrainerSafety.Domain/Pulpa.TrainerSafety.Domain.csproj" />
   <Project Path="Pulpa.TrainerSafety.ServiceDefaults/Pulpa.TrainerSafety.ServiceDefaults.csproj" />
   <Project Path="Pulpa.TrainerSafety/Pulpa.TrainerSafety.csproj" />
 </Solution>
