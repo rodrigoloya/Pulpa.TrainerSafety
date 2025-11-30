@@ -1,0 +1,6 @@
+@Pulpa.TrainerSafety.Api_HostAddress = http://localhost:5118
+
+GET {{Pulpa.TrainerSafety.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
