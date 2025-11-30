@@ -1,4 +1,16 @@
 <Solution>
+  <Folder Name="/Architecture/">
+    <File Path="Architecture/authentication-authorization-system.md" />
+    <File Path="Architecture/development-roadmap-mvp.md" />
+    <File Path="Architecture/email-sms-campaign-system.md" />
+    <File Path="Architecture/phishing-trainer-architecture.md" />
+    <File Path="Architecture/project-summary.md" />
+    <File Path="Architecture/pwa-deployment-strategy.md" />
+    <File Path="Architecture/security-data-protection.md" />
+    <File Path="Architecture/subscription-billing-system.md" />
+    <File Path="Architecture/system-architecture-diagram.md" />
+    <File Path="Architecture/tracking-analytics-system.md" />
+  </Folder>
   <Project Path="Pulpa.TrainerSafety.AppHost/Pulpa.TrainerSafety.AppHost.csproj" />
   <Project Path="Pulpa.TrainerSafety.ServiceDefaults/Pulpa.TrainerSafety.ServiceDefaults.csproj" />
   <Project Path="Pulpa.TrainerSafety/Pulpa.TrainerSafety.csproj" />
