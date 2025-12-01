@@ -35,7 +35,12 @@ public static class LoginUser
                 return Results.Unauthorized();
             }
 
-            string accessToken = await GenerateJwt(userManager, configuration,dbContext, user);
+            var appUser = await dbContext.Usuario
+                .FirstOrDefaultAsync(u => u.UsuarioExternalId == user.Id);
+            if (appUser is null)
+                return Results.BadRequest(new { Error = "Associated application user not found." });
+
+            string accessToken = await GenerateJwt(userManager, configuration,dbContext, user, appUser);
 
             return Results.Ok(new { AccessToken = accessToken });
         })
@@ -45,7 +50,7 @@ public static class LoginUser
         .Produces(StatusCodes.Status401Unauthorized);
     }
 
-    private static async Task<string> GenerateJwt(UserManager<UserTrainerSafety> userManager, IConfiguration configuration, ApplicationDbContext dbContext, UserTrainerSafety user)
+    private static async Task<string> GenerateJwt(UserManager<UserTrainerSafety> userManager, IConfiguration configuration, ApplicationDbContext dbContext, UserTrainerSafety user, Usuario appUser)
     {
         var roles = await userManager.GetRolesAsync(user);
 
@@ -64,12 +69,16 @@ public static class LoginUser
                              .Distinct()
                              .ToArrayAsync();
 
+        var subscriptionPermissions = GetPermissionsForSubscription(appUser.SubscriptionType);
+
+
         List<System.Security.Claims.Claim> claims = [
             new( JwtRegisteredClaimNames.Sub, user.Id),
                 new( JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
                 //passing a list inside of a list [] 😮
                 ..roles.Select(role => new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, role)),
-                ..permissions.Select(p => new System.Security.Claims.Claim(CustomClaimTypes.Permission, p))
+                ..permissions.Select(p => new System.Security.Claims.Claim(CustomClaimTypes.Permission, p)),
+                ..subscriptionPermissions.Select(p => new System.Security.Claims.Claim(CustomClaimTypes.Permission, p)),
                 ];
 
         var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
@@ -85,4 +94,18 @@ public static class LoginUser
         string accessToken = tokenHandler.CreateToken(tokenDescriptor);
         return accessToken;
     }
+
+    private static string[] GetPermissionsForSubscription(SubscriptionType subscriptionType)
+    {
+        return subscriptionType switch
+        {
+            SubscriptionType.Free => new[] { "create_campaign", "view_results" },
+            SubscriptionType.Pro => new[] {
+                "create_campaign", "view_results", "create_custom_template",
+                "manage_family", "advanced_analytics", "schedule_campaigns"
+            },
+            _ => Array.Empty<string>()
+        };
+    }
+
 }
