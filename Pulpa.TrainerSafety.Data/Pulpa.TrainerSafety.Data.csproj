@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pulpa.TrainerSafety.Domain\Pulpa.TrainerSafety.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

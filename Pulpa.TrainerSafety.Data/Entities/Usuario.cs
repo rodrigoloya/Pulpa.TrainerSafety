@@ -1,4 +1,6 @@
-﻿namespace Pulpa.TrainerSafety.Data.Entities
+﻿using Pulpa.TrainerSafety.Domain;
+
+namespace Pulpa.TrainerSafety.Data.Entities
 {
     public class Usuario : BaseEntity, IBaseEntity
     {
@@ -21,12 +23,4 @@
         PastDue,
         Cancelled
     }
-
-    public enum SubscriptionType
-    {
-        Unknown = 0,
-        Free,
-        Pro
-    }
-
 }
