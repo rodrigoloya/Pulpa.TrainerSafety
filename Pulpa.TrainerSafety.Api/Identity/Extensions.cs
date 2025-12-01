@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Pulpa.TrainerSafety.Api.Identity
 {  
@@ -39,6 +40,10 @@ namespace Pulpa.TrainerSafety.Api.Identity
             {
                 await roleManager.CreateAsync(new Microsoft.AspNetCore.Identity.IdentityRole(Roles.User));
             }
+        }
+        public static void RequirePermission(this AuthorizationPolicyBuilder builder, params string[] allowedPermissions)
+        {
+            builder.AddRequirements(new PermissionAuthorizationRequirement(allowedPermissions));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     Email = request.Email,
                     FirstName = request.FirstName,
                     LastName = request.LastName,                
-                   
+                    CreatedAt = DateTime.UtcNow
                 };
                      
                 var hashedPassword = passwordHasher.HashPassword(newUserTrainerSafety, request.Password);
@@ -32,8 +32,8 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     var errors = identityResult.Errors.Select(e => e.Description);
                     return Results.BadRequest(new { Errors = errors });
                 }
-               
-                var addToRoleResult = await userManager.AddToRoleAsync(newUserTrainerSafety, Roles.User);
+                 
+                var addToRoleResult = await userManager.AddToRoleAsync(newUserTrainerSafety, Roles.User );
 
                 if (!addToRoleResult.Succeeded)
                 {
@@ -47,6 +47,7 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     EnableNotifications = request.EnableNotifications,
                     SubscriptionType = SubscriptionType.Free,
                     Status = UserStatus.Active,
+                    DateCreated = DateTime.UtcNow
                 };
 
                 dbContext.Usuario.Add(newUsuario);

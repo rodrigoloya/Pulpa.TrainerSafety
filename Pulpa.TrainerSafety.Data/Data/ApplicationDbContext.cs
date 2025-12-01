@@ -13,8 +13,6 @@ namespace Pulpa.TrainerSafety.Data
         {
             _options = options;
         }
-               
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -47,7 +45,5 @@ namespace Pulpa.TrainerSafety.Data
         public DbSet<CampaignResult> CampaignResult { get; set; }
         public DbSet<PhishingTemplate> PhishingTemplate { get; set; }
         public DbSet<EducationalContent> EducationalContent { get; set; }
-
     }
-
 }
