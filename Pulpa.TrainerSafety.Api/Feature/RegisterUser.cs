@@ -13,22 +13,19 @@ namespace Pulpa.TrainerSafety.Api.Feature
             app.MapPost("/register-user", async (Request request,ApplicationDbContext dbContext, UserManager<UserTrainerSafety> userManager, IPasswordHasher<UserTrainerSafety> passwordHasher) =>
             {
                 using var transaction = await dbContext.Database.BeginTransactionAsync();
-                var newUser = new UserTrainerSafety
+                var newUserTrainerSafety = new UserTrainerSafety
                 {
                     UserName = request.Email,
                     Email = request.Email,
                     FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    EnableNotifications = request.EnableNotifications,
-                    SubscriptionType = SubscriptionType.Free,
-                    Status = UserTrainerSafetyStatus.Active,
-                    CreatedAt = DateTime.UtcNow
+                    LastName = request.LastName,                
+                   
                 };
                      
-                var hashedPassword = passwordHasher.HashPassword(newUser, request.Password);
-                newUser.PasswordHash = hashedPassword;
+                var hashedPassword = passwordHasher.HashPassword(newUserTrainerSafety, request.Password);
+                newUserTrainerSafety.PasswordHash = hashedPassword;
 
-                var identityResult = await userManager.CreateAsync(newUser, request.Password);
+                var identityResult = await userManager.CreateAsync(newUserTrainerSafety, request.Password);
 
                 if (!identityResult.Succeeded)
                 {
@@ -36,18 +33,30 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     return Results.BadRequest(new { Errors = errors });
                 }
                
-                var addToRoleResult = await userManager.AddToRoleAsync(newUser, Roles.User);
+                var addToRoleResult = await userManager.AddToRoleAsync(newUserTrainerSafety, Roles.User);
 
                 if (!addToRoleResult.Succeeded)
                 {
                     var errors = addToRoleResult.Errors.Select(e => e.Description);
                     return Results.BadRequest(new { Errors = errors });
                 }
+                
+                var newUsuario = new Usuario
+                {
+                    UsuarioExternalId = newUserTrainerSafety.Id,
+                    EnableNotifications = request.EnableNotifications,
+                    SubscriptionType = SubscriptionType.Free,
+                    Status = UserTrainerSafetyStatus.Active,
+                };
+
+                dbContext.Usuario.Add(newUsuario);
+
+                await dbContext.SaveChangesAsync();
 
                 await transaction.CommitAsync();
                 //TODO: await emailService.SendWelcomeEmailAsync(newUser.Email, newUser.FirstName);
 
-                return Results.Created($"/users/{newUser.Id}", new { newUser.Id, newUser.Email, newUser.FirstName, newUser.LastName });
+                return Results.Created($"/users/{newUserTrainerSafety.Id}", new { newUserTrainerSafety.Id, newUserTrainerSafety.Email, newUserTrainerSafety.FirstName, newUserTrainerSafety.LastName });
             });
         }
     }

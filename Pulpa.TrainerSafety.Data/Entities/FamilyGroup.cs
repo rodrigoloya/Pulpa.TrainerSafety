@@ -6,23 +6,26 @@ using System.Text;
 
 namespace Pulpa.TrainerSafety.Data.Entities
 {
+    public class Usuario : BaseEntity
+    {
+        public int UsuarioId { get; set; }
+        public string? UsuarioExternalId { get; set; }              
+        public SubscriptionType SubscriptionType { get; set; }        
+        public virtual FamilyGroup? FamilyGroup { get; set; }
+        public virtual ICollection<Campaign> Campaigns { get; set; }
+        public virtual ICollection<CampaignResult> CampaignResults { get; set; }
+        public bool EnableNotifications { get; set; }
+        public UserTrainerSafetyStatus Status { get; set; }
+    }
+
     public class UserTrainerSafety : IdentityUser
     {
-        public string? UsuarioExternalId { get; set; }
         [MaxLength(255)]
         public string FirstName { get; set; }
         [MaxLength(255)]
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? LastLoginAt { get; set; }
-        public SubscriptionType SubscriptionType { get; set; }   
-        public int? FamilyGroupId { get; set; }
-        public virtual FamilyGroup? FamilyGroup { get; set; }
-        public virtual ICollection<Campaign> Campaigns { get; set; }
-        public virtual ICollection<CampaignResult> CampaignResults { get; set; }
-        public bool EnableNotifications { get; set; }
-        public UserTrainerSafetyStatus Status { get; set; }
-         
     }
 
     public enum UserTrainerSafetyStatus
@@ -46,27 +49,25 @@ namespace Pulpa.TrainerSafety.Data.Entities
     {
         public int FamilyGroupId { get; set; }
         [MaxLength(255)]
-        public string Name { get; set; }
-        public int OwnerId { get; set; }
-        public virtual UserTrainerSafety Owner { get; set; }
-        public virtual ICollection<UserTrainerSafety> Members { get; set; }
+        public string Name { get; set; }       
+        public virtual Usuario Usuario { get; set; }
+        public virtual ICollection<Usuario> Members { get; set; }
     }
 
     public class Campaign : BaseEntity
     {
         public int CampaignId { get; set; }
         public string Name { get; set; }
-        public string? Description { get; set; }
-        public int? OwnerId { get; set; }
-        public virtual UserTrainerSafety? Owner { get; set; }
+        public string? Description { get; set; }       
+        public virtual Usuario? Usuario { get; set; }
         public CampaignType Type { get; set; }
         public CampaignStatus Status { get; set; }
         public DateTime ScheduledAt { get; set; }
         public DateTime? StartedAt { get; set; }
         public DateTime? CompletedAt { get; set; }
-        public PhishingTemplate? Template { get; set; }
-        public virtual ICollection<CampaignTarget> Targets { get; set; }
-        public virtual ICollection<CampaignResult> Results { get; set; }
+        public PhishingTemplate? PhishingTemplate { get; set; }
+        public virtual ICollection<CampaignTarget> CampaignTargets { get; set; }
+        public virtual ICollection<CampaignResult> CampaignResults { get; set; }
     }
 
     public enum CampaignType
@@ -114,9 +115,8 @@ namespace Pulpa.TrainerSafety.Data.Entities
     public class CampaignTarget : BaseEntity
     {
         public int CampaignTargetId { get; set; }      
-        public virtual Campaign Campaign { get; set; }
-        public int? TargetUserId { get; set; }
-        public virtual UserTrainerSafety? TargetUser { get; set; }
+        public virtual Campaign Campaign { get; set; }        
+        public virtual Usuario? Usuario { get; set; }
         public string? EmailAddress { get; set; }
 
         [MaxLength(15)]
@@ -130,7 +130,7 @@ namespace Pulpa.TrainerSafety.Data.Entities
     {
         public int CampaignResultId { get; set; }      
         public virtual Campaign? Campaign { get; set; }      
-        public virtual UserTrainerSafety Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; }
         public DateTime? EmailOpenedAt { get; set; }
         public DateTime? LinkClickedAt { get; set; }
         public DateTime? DataSubmittedAt { get; set; }

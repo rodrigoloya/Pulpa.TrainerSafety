@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pulpa.TrainerSafety.Data;
 
@@ -11,9 +12,11 @@ using Pulpa.TrainerSafety.Data;
 namespace Pulpa.TrainerSafety.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251201065412_refactorizacion_esto_estamal")]
+    partial class refactorizacion_esto_estamal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +189,7 @@ namespace Pulpa.TrainerSafety.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PhishingTemplateId")
+                    b.Property<int?>("OwnerUsuarioId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ScheduledAt")
@@ -198,6 +201,9 @@ namespace Pulpa.TrainerSafety.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TemplatePhishingTemplateId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -207,14 +213,11 @@ namespace Pulpa.TrainerSafety.Data.Migrations
                     b.Property<string>("UserUpdated")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("CampaignId");
 
-                    b.HasIndex("PhishingTemplateId");
+                    b.HasIndex("OwnerUsuarioId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("TemplatePhishingTemplateId");
 
                     b.ToTable("Campaign", "TrainerSafety");
                 });
@@ -320,20 +323,20 @@ namespace Pulpa.TrainerSafety.Data.Migrations
                     b.Property<bool?>("SmsSent")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("TargetUserUsuarioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserCreated")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserUpdated")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("CampaignTargetId");
 
                     b.HasIndex("CampaignId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("TargetUserUsuarioId");
 
                     b.ToTable("CampaignTarget", "TrainerSafety");
                 });
@@ -503,7 +506,9 @@ namespace Pulpa.TrainerSafety.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2025, 12, 1, 6, 54, 12, 445, DateTimeKind.Utc).AddTicks(7895));
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -679,23 +684,23 @@ namespace Pulpa.TrainerSafety.Data.Migrations
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.Campaign", b =>
                 {
-                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.PhishingTemplate", "PhishingTemplate")
-                        .WithMany()
-                        .HasForeignKey("PhishingTemplateId");
-
-                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Usuario")
+                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Owner")
                         .WithMany("Campaigns")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("OwnerUsuarioId");
 
-                    b.Navigation("PhishingTemplate");
+                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.PhishingTemplate", "Template")
+                        .WithMany()
+                        .HasForeignKey("TemplatePhishingTemplateId");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Owner");
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.CampaignResult", b =>
                 {
                     b.HasOne("Pulpa.TrainerSafety.Data.Entities.Campaign", "Campaign")
-                        .WithMany("CampaignResults")
+                        .WithMany("Results")
                         .HasForeignKey("CampaignId");
 
                     b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Usuario")
@@ -712,29 +717,29 @@ namespace Pulpa.TrainerSafety.Data.Migrations
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.CampaignTarget", b =>
                 {
                     b.HasOne("Pulpa.TrainerSafety.Data.Entities.Campaign", "Campaign")
-                        .WithMany("CampaignTargets")
+                        .WithMany("Targets")
                         .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Usuario")
+                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "TargetUser")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("TargetUserUsuarioId");
 
                     b.Navigation("Campaign");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("TargetUser");
                 });
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.FamilyGroup", b =>
                 {
-                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Usuario")
+                    b.HasOne("Pulpa.TrainerSafety.Data.Entities.Usuario", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.Usuario", b =>
@@ -753,9 +758,9 @@ namespace Pulpa.TrainerSafety.Data.Migrations
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.Campaign", b =>
                 {
-                    b.Navigation("CampaignResults");
+                    b.Navigation("Results");
 
-                    b.Navigation("CampaignTargets");
+                    b.Navigation("Targets");
                 });
 
             modelBuilder.Entity("Pulpa.TrainerSafety.Data.Entities.FamilyGroup", b =>

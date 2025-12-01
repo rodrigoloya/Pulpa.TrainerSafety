@@ -17,23 +17,32 @@ namespace Pulpa.TrainerSafety.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<UserTrainerSafety>(entity =>
+            builder.Entity<Usuario>(entity =>
             {
-                entity.Property(e=> e.EnableNotifications).HasDefaultValue(true);
-                entity.HasOne(e => e.FamilyGroup)
-                    .WithMany()
-                    .HasForeignKey(e => e.FamilyGroupId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(e => e.EnableNotifications).HasDefaultValue(true);
+                 
+            });
+
+            builder.Entity<FamilyGroup>(entity =>
+            {
+                entity.HasOne(fg => fg.Usuario)
+                      .WithMany()
+                      .HasForeignKey("OwnerId")
+                      .OnDelete(DeleteBehavior.Restrict);
+                entity.HasMany(fg => fg.Members)
+                      .WithOne()
+                      .HasForeignKey("FamilyGroupId")
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.HasDefaultSchema("TrainerSafety");
         }
 
-        public DbSet<UserTrainerSafety> UserTrainerSafeties { get; set; }
-        public DbSet<FamilyGroup> FamilyGroups { get; set; }
-        public DbSet<Campaign> Campaigns { get; set; }
-        public DbSet<CampaignTarget> CampaignTargets { get; set; }
-        public DbSet<CampaignResult> CampaignResults { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<FamilyGroup> FamilyGroup { get; set; }
+        public DbSet<Campaign> Campaign { get; set; }
+        public DbSet<CampaignTarget> CampaignTarget { get; set; }
+        public DbSet<CampaignResult> CampaignResult { get; set; }
         public DbSet<PhishingTemplate> PhishingTemplate { get; set; }
 
         public DbSet<EducationalContent> EducationalContent { get; set; }
