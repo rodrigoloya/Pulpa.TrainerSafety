@@ -4,9 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>990bb722-644d-4bbc-aac1-c1d28a255657</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
@@ -21,10 +23,6 @@
     <ProjectReference Include="..\Pulpa.TrainerSafety.Data\Pulpa.TrainerSafety.Data.csproj" />
     <ProjectReference Include="..\Pulpa.TrainerSafety.Domain\Pulpa.TrainerSafety.Domain.csproj" />
     <ProjectReference Include="..\Pulpa.TrainerSafety.ServiceDefaults\Pulpa.TrainerSafety.ServiceDefaults.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Identity\" />
   </ItemGroup>
 
 </Project>

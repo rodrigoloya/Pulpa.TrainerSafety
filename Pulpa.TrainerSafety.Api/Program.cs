@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Pulpa.TrainerSafety.Api.AppStart;
 using Pulpa.TrainerSafety.Api.Feature;
+using Pulpa.TrainerSafety.Api.Identity;
 using Pulpa.TrainerSafety.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,17 +16,30 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<Pulpa.TrainerSafety.Data.ApplicationDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
     {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null);
-    })
-  
+        sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+    })  
 );
 
 builder.Services.AddIdentity<Pulpa.TrainerSafety.Data.Entities.UserTrainerSafety, 
     Microsoft.AspNetCore.Identity.IdentityRole>()
     .AddEntityFrameworkStores<Pulpa.TrainerSafety.Data.ApplicationDbContext>();
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;
+
+})
+.AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters.ValidIssuer = builder.Configuration["Jwt:Issuer"];
+    opt.TokenValidationParameters.ValidAudience = builder.Configuration["Jwt:Audience"];
+    opt.TokenValidationParameters.IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+        System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"] ?? string.Empty));
+
+});
+
+builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
@@ -35,30 +50,14 @@ app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-
-    using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<Pulpa.TrainerSafety.Data.ApplicationDbContext>();
-    dbContext.Database.Migrate();
-
-    var roleManager = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
-    if(!await roleManager.RoleExistsAsync(Roles.Admin))
-    {
-        await roleManager.CreateAsync(new Microsoft.AspNetCore.Identity.IdentityRole(Roles.Admin));
-    }
-    if (!await roleManager.RoleExistsAsync(Roles.Member))
-    {
-        await roleManager.CreateAsync(new Microsoft.AspNetCore.Identity.IdentityRole(Roles.Member));
-    }
-    if (!await roleManager.RoleExistsAsync(Roles.User))
-    {
-        await roleManager.CreateAsync(new Microsoft.AspNetCore.Identity.IdentityRole(Roles.User));
-    }
+    await app.ApplyMigrations();
+    await app.SeedRolesAndPermissions();
+   
 }
-
-RegisterUser.MapEndpoint(app);
+Registrations.MapEndpoints(app); 
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

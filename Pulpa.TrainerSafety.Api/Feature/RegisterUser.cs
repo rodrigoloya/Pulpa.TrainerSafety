@@ -1,4 +1,6 @@
 ﻿
+using Pulpa.TrainerSafety.Data;
+
 namespace Pulpa.TrainerSafety.Api.Feature
 {
     public static class RegisterUser
@@ -8,8 +10,9 @@ namespace Pulpa.TrainerSafety.Api.Feature
         public static void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapGet("ping-register-user", () => "Pong from Register User");
-            app.MapPost("/register-user", async (Request request, UserManager<UserTrainerSafety> userManager, IPasswordHasher<UserTrainerSafety> passwordHasher) =>
+            app.MapPost("/register-user", async (Request request,ApplicationDbContext dbContext, UserManager<UserTrainerSafety> userManager, IPasswordHasher<UserTrainerSafety> passwordHasher) =>
             {
+                using var transaction = await dbContext.Database.BeginTransactionAsync();
                 var newUser = new UserTrainerSafety
                 {
                     UserName = request.Email,
@@ -40,11 +43,12 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     var errors = addToRoleResult.Errors.Select(e => e.Description);
                     return Results.BadRequest(new { Errors = errors });
                 }
-                //await emailService.SendWelcomeEmailAsync(newUser.Email, newUser.FirstName);
+
+                await transaction.CommitAsync();
+                //TODO: await emailService.SendWelcomeEmailAsync(newUser.Email, newUser.FirstName);
 
                 return Results.Created($"/users/{newUser.Id}", new { newUser.Id, newUser.Email, newUser.FirstName, newUser.LastName });
             });
         }
-
     }
 }
