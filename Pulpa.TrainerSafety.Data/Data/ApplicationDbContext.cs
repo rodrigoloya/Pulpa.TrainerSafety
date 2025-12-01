@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Pulpa.TrainerSafety.Data.Entities;
 
 namespace Pulpa.TrainerSafety.Data
@@ -12,6 +13,7 @@ namespace Pulpa.TrainerSafety.Data
         {
             _options = options;
         }
+               
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,7 +46,6 @@ namespace Pulpa.TrainerSafety.Data
         public DbSet<CampaignTarget> CampaignTarget { get; set; }
         public DbSet<CampaignResult> CampaignResult { get; set; }
         public DbSet<PhishingTemplate> PhishingTemplate { get; set; }
-
         public DbSet<EducationalContent> EducationalContent { get; set; }
 
     }

@@ -46,7 +46,7 @@ namespace Pulpa.TrainerSafety.Api.Feature
                     UsuarioExternalId = newUserTrainerSafety.Id,
                     EnableNotifications = request.EnableNotifications,
                     SubscriptionType = SubscriptionType.Free,
-                    Status = UserTrainerSafetyStatus.Active,
+                    Status = UserStatus.Active,
                 };
 
                 dbContext.Usuario.Add(newUsuario);
