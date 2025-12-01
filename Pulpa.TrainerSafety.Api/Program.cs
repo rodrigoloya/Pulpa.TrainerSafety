@@ -3,6 +3,7 @@ using Pulpa.TrainerSafety.Api.AppStart;
 using Pulpa.TrainerSafety.Api.Feature;
 using Pulpa.TrainerSafety.Api.Identity;
 using Pulpa.TrainerSafety.Domain;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,10 @@ app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference(options =>
+    {
+        options.WithTitle("My API");
+    });
     await app.ApplyMigrations();
     await app.SeedRolesAndPermissions();
    
