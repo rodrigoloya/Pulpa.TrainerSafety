@@ -1,7 +1,411 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Phishing Trainer - Entrenamiento de Seguridad para Todos</PageTitle>
 
-<h1>Hello, world!</h1>
+<link href="css/landing.css" rel="stylesheet" />
 
-Welcome to your new app.
+<!-- Navigation -->
+<nav class="landing-nav">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <div class="nav-logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <span>Phishing Trainer</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Características</a>
+            <a href="#pricing" class="nav-link">Planes</a>
+            <a href="#how-it-works" class="nav-link">¿Cómo funciona?</a>
+            <a href="/login" class="nav-cta">Iniciar Sesión</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Protección Digital Inteligente
+            </div>
+            <h1 class="hero-title">
+                Entrena tu <span class="hero-title-highlight">seguridad digital</span> de forma práctica
+            </h1>
+            <p class="hero-description">
+                Aprende a identificar ataques de phishing en un ambiente seguro. 
+                Protege a tu familia con simulaciones realistas de correos y SMS maliciosos.
+            </p>
+            <div class="hero-cta-group">
+                <a href="/register" class="btn-primary">
+                    Comenzar Gratis
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+                <a href="#pricing" class="btn-secondary">
+                    Ver Planes
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Seguro</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Disponible</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Miembros familia</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="300" fill="none" viewBox="0 0 400 300">
+                    <rect width="400" height="300" fill="#f8fafc" rx="8"/>
+                    <rect x="30" y="40" width="340" height="60" fill="#6366f1" rx="8"/>
+                    <rect x="50" y="55" width="120" height="12" fill="white" opacity="0.9" rx="6"/>
+                    <rect x="50" y="73" width="200" height="12" fill="white" opacity="0.7" rx="6"/>
+                    <circle cx="350" cy="70" r="20" fill="white" opacity="0.3"/>
+                    <path d="M345 70 L350 75 L360 65" stroke="white" stroke-width="2" fill="none"/>
+                    
+                    <rect x="30" y="130" width="160" height="120" fill="white" rx="8" stroke="#e2e8f0" stroke-width="2"/>
+                    <rect x="50" y="150" width="120" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="50" y="170" width="100" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="50" y="190" width="120" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="50" y="210" width="80" height="20" fill="#10b981" rx="4"/>
+                    
+                    <rect x="210" y="130" width="160" height="120" fill="white" rx="8" stroke="#e2e8f0" stroke-width="2"/>
+                    <rect x="230" y="150" width="120" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="230" y="170" width="100" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="230" y="190" width="120" height="8" fill="#cbd5e1" rx="4"/>
+                    <rect x="230" y="210" width="80" height="20" fill="#6366f1" rx="4"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features-section">
+    <div class="features-container">
+        <div class="section-header">
+            <span class="section-badge">Características</span>
+            <h2 class="section-title">Todo lo que necesitas para estar protegido</h2>
+            <p class="section-description">
+                Herramientas profesionales diseñadas para que cualquiera pueda aprender seguridad digital
+            </p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Simulaciones Realistas</h3>
+                <p class="feature-description">
+                    Campañas de phishing simuladas por email y SMS que replican ataques reales sin el riesgo.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Análisis en Tiempo Real</h3>
+                <p class="feature-description">
+                    Monitorea el progreso de tus campañas con métricas detalladas y reportes visuales.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Contenido Educativo</h3>
+                <p class="feature-description">
+                    Aprende con retroalimentación instantánea y recursos educativos personalizados.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Protección Familiar</h3>
+                <p class="feature-description">
+                    Crea grupos familiares y entrena a hasta 5 miembros simultáneamente con el plan Pro.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">PWA Móvil</h3>
+                <p class="feature-description">
+                    Aplicación web progresiva que funciona offline y se instala como app nativa.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">100% Seguro</h3>
+                <p class="feature-description">
+                    Ambiente completamente controlado y seguro. Tus datos están protegidos y encriptados.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="how-it-works-section">
+    <div class="features-container">
+        <div class="section-header">
+            <span class="section-badge">Proceso Simple</span>
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <p class="section-description">
+                En solo 4 pasos, comienza a mejorar tu seguridad digital
+            </p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Regístrate</h3>
+                <p class="step-description">
+                    Crea tu cuenta gratuita en menos de 2 minutos
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Elige una Plantilla</h3>
+                <p class="step-description">
+                    Selecciona de nuestra biblioteca de simulaciones
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Lanza tu Campaña</h3>
+                <p class="step-description">
+                    Configura y programa tu entrenamiento
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Aprende y Mejora</h3>
+                <p class="step-description">
+                    Analiza resultados y recibe retroalimentación
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="pricing-section">
+    <div class="pricing-container">
+        <div class="section-header">
+            <span class="section-badge">Planes</span>
+            <h2 class="section-title">Elige el plan perfecto para ti</h2>
+            <p class="section-description">
+                Comienza gratis o desbloquea características premium para tu familia
+            </p>
+        </div>
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-name">Free</h3>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">$</span>0
+                        <span class="pricing-period">/mes</span>
+                    </div>
+                    <p class="pricing-description">Perfecto para comenzar tu entrenamiento</p>
+                </div>
+                <ul class="pricing-features">
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        1 campaña activa
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Solo uso personal
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Plantillas básicas
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Analíticas básicas (7 días)
+                    </li>
+                    <li class="pricing-feature disabled">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Grupos familiares
+                    </li>
+                    <li class="pricing-feature disabled">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Plantillas personalizadas
+                    </li>
+                    <li class="pricing-feature disabled">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Programación avanzada
+                    </li>
+                </ul>
+                <a href="/register" class="pricing-cta">
+                    Comenzar Gratis
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Más Popular</div>
+                <div class="pricing-header">
+                    <h3 class="pricing-name">Pro</h3>
+                    <div class="pricing-price">
+                        <span class="pricing-currency">$</span>10
+                        <span class="pricing-period">/mes</span>
+                    </div>
+                    <p class="pricing-description">Protección completa para toda tu familia</p>
+                </div>
+                <ul class="pricing-features">
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Campañas ilimitadas
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Hasta 5 miembros familiares
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Todas las plantillas
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Analíticas avanzadas (90 días)
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Grupos familiares
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Plantillas personalizadas
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Programación de campañas
+                    </li>
+                    <li class="pricing-feature">
+                        <svg class="pricing-feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Soporte prioritario
+                    </li>
+                </ul>
+                <a href="/register?plan=pro" class="pricing-cta">
+                    Comenzar Prueba Pro
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-content">
+        <h2 class="cta-title">Comienza a proteger tu seguridad digital hoy</h2>
+        <p class="cta-description">
+            Únete a miles de usuarios que ya están aprendiendo a identificar amenazas digitales
+        </p>
+        <div class="cta-buttons">
+            <a href="/register" class="btn-primary">
+                Crear Cuenta Gratis
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </a>
+            <a href="#pricing" class="btn-secondary">
+                Ver Planes
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="landing-footer">
+    <div class="footer-container">
+        <div class="footer-logo">Phishing Trainer</div>
+        <div class="footer-links">
+            <a href="#features" class="footer-link">Características</a>
+            <a href="#pricing" class="footer-link">Planes</a>
+            <a href="#how-it-works" class="footer-link">¿Cómo funciona?</a>
+            <a href="/terms" class="footer-link">Términos</a>
+            <a href="/privacy" class="footer-link">Privacidad</a>
+        </div>
+        <p class="footer-copyright">
+            © @DateTime.Now.Year Pulpa LLC. Todos los derechos reservados.
+        </p>
+    </div>
+</footer>
+
+@code {
+    // Landing page logic if needed
+}
